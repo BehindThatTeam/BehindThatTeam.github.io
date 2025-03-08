@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>BehindThatTeam - AI Solutions</title>
+    <title>BehindThatTeam</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -30,7 +30,7 @@
         }
 
         .grid-background {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -45,7 +45,7 @@
         }
 
         .light-effect {
-            position: absolute;
+            position: fixed;
             width: 1200px;
             height: 1200px;
             border-radius: 50%;
@@ -53,18 +53,19 @@
             filter: blur(70px);
             z-index: -1;
             opacity: 0;
-            animation: fadeIn 2s ease forwards 0.8s;
+            animation: pulse 10s ease-in-out infinite alternate;
         }
 
         .light-effect-1 {
             top: -500px;
             left: -400px;
+            animation: pulse 10s ease-in-out infinite alternate, fadeIn 2s ease forwards 0.8s;
         }
 
         .light-effect-2 {
             bottom: -600px;
             right: -400px;
-            animation: fadeIn 2s ease forwards 1s;
+            animation: pulse 12s ease-in-out infinite alternate-reverse, fadeIn 2s ease forwards 1s;
         }
 
         .light-effect-3 {
@@ -74,7 +75,7 @@
             width: 600px;
             height: 600px;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 40%, transparent 70%);
-            animation: fadeIn 2s ease forwards 1.2s;
+            animation: pulse 8s ease-in-out infinite alternate, fadeIn 2s ease forwards 1.2s;
         }
 
         .navbar {
@@ -92,47 +93,39 @@
             animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
             background: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 800;
             letter-spacing: -1px;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            transition: transform 0.3s ease;
             position: relative;
+            cursor: pointer;
         }
 
-        .nav-link:after {
+        .logo:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .logo::after {
             content: '';
             position: absolute;
+            left: 0;
+            bottom: -5px;
             width: 0;
             height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--accent);
+            background: linear-gradient(90deg, var(--accent), transparent);
             transition: width 0.3s ease;
         }
 
-        .nav-link:hover {
-            color: var(--secondary);
-        }
-
-        .nav-link:hover:after {
+        .logo:hover::after {
             width: 100%;
         }
 
@@ -162,18 +155,25 @@
             transform: translateY(50px);
             animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
             text-align: center;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        h1 span {
-            background: linear-gradient(90deg, #ffffff, var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.2s;
         }
 
         p {
             font-size: 1.4rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(142, 142, 142, 0.7);
             margin-bottom: 3rem;
             font-weight: 300;
             line-height: 1.7;
@@ -182,78 +182,6 @@
             opacity: 0;
             transform: translateY(30px);
             animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.7s;
-        }
-
-        .buttons-container {
-            display: flex;
-            gap: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.9s;
-        }
-
-        .cta-button {
-            padding: 1.2rem 3rem;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--primary);
-            background: var(--secondary);
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .cta-button.primary {
-            background: var(--accent);
-            color: var(--secondary);
-        }
-
-        .cta-button.secondary {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--secondary);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .cta-button.primary:hover {
-            background: var(--accent-light);
-        }
-
-        .cta-button.secondary:hover {
-            border-color: rgba(255, 255, 255, 0.5);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .cta-button:active {
-            transform: translateY(-1px);
-        }
-
-        .cta-button::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: 0.6s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
         }
 
         .transition-overlay {
@@ -284,56 +212,38 @@
             text-decoration: none;
             font-size: 1.2rem;
             transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
         }
 
         .social-link:hover {
-            color: var(--accent);
+            color: var(--secondary);
             transform: translateY(-3px);
         }
 
-        .features {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 2rem;
-            width: 100%;
-            max-width: 350px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            border-color: rgba(75, 0, 130, 0.3);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .feature-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .feature-desc {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
-            line-height: 1.6;
+        .social-link:hover::before {
+            transform: scale(1);
         }
 
         .ukraine-badge {
@@ -343,13 +253,22 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             background: rgba(0, 0, 0, 0.3);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
             opacity: 0;
-            animation: fadeIn 1s ease forwards 1.5s;
+            animation: fadeIn 1s ease forwards 1.5s, float 5s ease-in-out infinite;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .ukraine-badge:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
         }
 
         .ukraine-flag {
@@ -358,6 +277,55 @@
             height: 16px;
             background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
             border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .cta-button {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: var(--secondary);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.9s;
+            box-shadow: 0 5px 15px rgba(75, 0, 130, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(75, 0, 130, 0.4);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         @keyframes revealEffect {
@@ -411,39 +379,78 @@
             }
         }
 
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.5;
+                transform: scale(1) translate(0, 0);
+            }
+            100% {
+                opacity: 0.8;
+                transform: scale(1.1) translate(5%, 5%);
+            }
+        }
+
+        @keyframes moveParticle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 3.5rem;
+                letter-spacing: -2px;
             }
 
             p {
                 font-size: 1.2rem;
-            }
-
-            .buttons-container {
-                flex-direction: column;
+                padding: 0 1rem;
             }
 
             .navbar {
                 padding: 1rem;
             }
 
-            .nav-links {
-                display: none;
+            .ukraine-badge {
+                bottom: 5rem;
+                right: 50%;
+                transform: translateX(50%);
             }
 
-            .mobile-menu-btn {
-                display: block;
-                color: var(--secondary);
-                font-size: 1.5rem;
-                background: none;
-                border: none;
-                cursor: pointer;
+            .light-effect {
+                width: 800px;
+                height: 800px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.8rem;
             }
 
-            .features {
-                flex-direction: column;
-                align-items: center;
+            p {
+                font-size: 1rem;
+            }
+
+            .social-links {
+                bottom: 1.5rem;
             }
         }
     </style>
@@ -454,64 +461,20 @@
 <div class="light-effect light-effect-1"></div>
 <div class="light-effect light-effect-2"></div>
 <div class="light-effect light-effect-3"></div>
+<div class="particles-container" id="particles"></div>
 
 <nav class="navbar">
     <div class="logo">BehindThatTeam</div>
-    <div class="nav-links">
-        <a href="#" class="nav-link">Solutions</a>
-        <a href="#" class="nav-link">Industries</a>
-        <a href="#" class="nav-link">About Us</a>
-        <a href="#" class="nav-link">Case Studies</a>
-        <a href="#" class="nav-link">Contact</a>
-    </div>
-    <button class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-    </button>
 </nav>
 
 <div class="content">
-    <h1>Advanced <span>AI Solutions</span></h1>
-    <p>BTT delivers cutting-edge artificial intelligence technologies that transform businesses through innovation, efficiency, and expertise from the heart of Ukraine.</p>
-    <div class="buttons-container">
-        <button class="cta-button primary">
-            <i class="fas fa-robot"></i>
-            Our Solutions
-        </button>
-        <button class="cta-button secondary">
-            <i class="fas fa-handshake"></i>
-            Partner With Us
-        </button>
-    </div>
+    <h1>BehindThatTeam</h1>
+    <p>BTT specializes in integration and work with AI</p>
+    <button class="cta-button">Learn more</button>
 
     <div class="ukraine-badge">
         <span class="ukraine-flag"></span>
-        Based in Ukraine
-    </div>
-</div>
-
-<div class="features">
-    <div class="feature-card">
-        <div class="feature-icon">
-            <i class="fas fa-brain"></i>
-        </div>
-        <h3 class="feature-title">Machine Learning</h3>
-        <p class="feature-desc">Custom ML solutions that analyze data patterns and make intelligent predictions for your business needs.</p>
-    </div>
-
-    <div class="feature-card">
-        <div class="feature-icon">
-            <i class="fas fa-chart-line"></i>
-        </div>
-        <h3 class="feature-title">Data Analytics</h3>
-        <p class="feature-desc">Transform raw data into actionable insights with our advanced analytics platforms.</p>
-    </div>
-
-    <div class="feature-card">
-        <div class="feature-icon">
-            <i class="fas fa-comments"></i>
-        </div>
-        <h3 class="feature-title">NLP Solutions</h3>
-        <p class="feature-desc">Natural Language Processing tools that understand, interpret, and generate human language.</p>
+        Based in Kyiv, Ukraine
     </div>
 </div>
 
@@ -520,16 +483,5 @@
     <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
     <a href="#" class="social-link"><i class="fab fa-github"></i></a>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-    });
-</script>
 </body>
 </html>
