@@ -1,10 +1,535 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Welcome!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BehindThatTeam - AI Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #ffffff;
+            --accent: #4B0082;
+            --accent-light: #8567d8;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--primary);
+            color: var(--secondary);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -2;
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards 0.5s;
+        }
+
+        .light-effect {
+            position: absolute;
+            width: 1200px;
+            height: 1200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(75, 0, 130, 0.15) 0%, rgba(75, 0, 130, 0.05) 40%, transparent 70%);
+            filter: blur(70px);
+            z-index: -1;
+            opacity: 0;
+            animation: fadeIn 2s ease forwards 0.8s;
+        }
+
+        .light-effect-1 {
+            top: -500px;
+            left: -400px;
+        }
+
+        .light-effect-2 {
+            bottom: -600px;
+            right: -400px;
+            animation: fadeIn 2s ease forwards 1s;
+        }
+
+        .light-effect-3 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 40%, transparent 70%);
+            animation: fadeIn 2s ease forwards 1.2s;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: var(--accent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .content {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(180deg, #ffffff, #b0b0b0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+            text-align: center;
+        }
+
+        h1 span {
+            background: linear-gradient(90deg, #ffffff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        p {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 700px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.7s;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.9s;
+        }
+
+        .cta-button {
+            padding: 1.2rem 3rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: var(--secondary);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .cta-button.primary {
+            background: var(--accent);
+            color: var(--secondary);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--secondary);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button.primary:hover {
+            background: var(--accent-light);
+        }
+
+        .cta-button.secondary:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        .cta-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.6s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 100;
+            transform-origin: center;
+            animation: revealEffect 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        .social-links {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.5s;
+        }
+
+        .social-link {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(75, 0, 130, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .feature-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .ukraine-badge {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.5s;
+        }
+
+        .ukraine-flag {
+            display: inline-block;
+            width: 24px;
+            height: 16px;
+            background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
+            border-radius: 2px;
+        }
+
+        @keyframes revealEffect {
+            0% {
+                clip-path: circle(0% at center);
+            }
+            30% {
+                clip-path: circle(5% at center);
+                background-color: #000;
+            }
+            60% {
+                clip-path: circle(25% at center);
+                background-color: var(--primary);
+            }
+            100% {
+                clip-path: circle(150% at center);
+                background-color: var(--primary);
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+            }
+
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                color: var(--secondary);
+                font-size: 1.5rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
+<div class="transition-overlay"></div>
+<div class="grid-background"></div>
+<div class="light-effect light-effect-1"></div>
+<div class="light-effect light-effect-2"></div>
+<div class="light-effect light-effect-3"></div>
 
+<nav class="navbar">
+    <div class="logo">BehindThatTeam</div>
+    <div class="nav-links">
+        <a href="#" class="nav-link">Solutions</a>
+        <a href="#" class="nav-link">Industries</a>
+        <a href="#" class="nav-link">About Us</a>
+        <a href="#" class="nav-link">Case Studies</a>
+        <a href="#" class="nav-link">Contact</a>
+    </div>
+    <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+    </button>
+</nav>
+
+<div class="content">
+    <h1>Advanced <span>AI Solutions</span></h1>
+    <p>BTT delivers cutting-edge artificial intelligence technologies that transform businesses through innovation, efficiency, and expertise from the heart of Ukraine.</p>
+    <div class="buttons-container">
+        <button class="cta-button primary">
+            <i class="fas fa-robot"></i>
+            Our Solutions
+        </button>
+        <button class="cta-button secondary">
+            <i class="fas fa-handshake"></i>
+            Partner With Us
+        </button>
+    </div>
+
+    <div class="ukraine-badge">
+        <span class="ukraine-flag"></span>
+        Based in Ukraine
+    </div>
+</div>
+
+<div class="features">
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-brain"></i>
+        </div>
+        <h3 class="feature-title">Machine Learning</h3>
+        <p class="feature-desc">Custom ML solutions that analyze data patterns and make intelligent predictions for your business needs.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <h3 class="feature-title">Data Analytics</h3>
+        <p class="feature-desc">Transform raw data into actionable insights with our advanced analytics platforms.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-comments"></i>
+        </div>
+        <h3 class="feature-title">NLP Solutions</h3>
+        <p class="feature-desc">Natural Language Processing tools that understand, interpret, and generate human language.</p>
+    </div>
+</div>
+
+<div class="social-links">
+    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    });
+</script>
 </body>
 </html>
