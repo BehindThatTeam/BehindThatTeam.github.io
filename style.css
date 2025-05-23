@@ -28,10 +28,10 @@
     --md-sys-color-error-container: #8C1D18;
     --md-sys-color-on-error-container: #F9DEDC;
 
-    --md-sys-color-background: #1C1B1F; 
+    --md-sys-color-background: #000000; 
     --md-sys-color-on-background: #E6E1E5;
 
-    --md-sys-color-surface: #1C1B1F; 
+    --md-sys-color-surface: #000000; 
     --md-sys-color-on-surface: #E6E1E5;
     --md-sys-color-surface-variant: #49454F; 
     --md-sys-color-on-surface-variant: #CAC4D0; 
@@ -57,11 +57,11 @@
     --md-sys-elevation-level5-opacity: 14%;
     
     
-    --md-sys-color-surface-dim: #141218; 
+    --md-sys-color-surface-dim: #000000; 
     --md-sys-color-surface-bright: #3B383E; 
-    --md-sys-color-surface-container-lowest: #0F0D13;
-    --md-sys-color-surface-container-low: #1C1B20;
-    --md-sys-color-surface-container: #201F24;
+    --md-sys-color-surface-container-lowest: #000000;
+    --md-sys-color-surface-container-low: #000000;
+    --md-sys-color-surface-container: #000000;
     --md-sys-color-surface-container-high: #2B292F;
     --md-sys-color-surface-container-highest: #36343A;
 
