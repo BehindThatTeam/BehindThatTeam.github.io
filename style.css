@@ -13,6 +13,7 @@
     --shadow: rgba(0, 0, 0, 0.3);
     --text-muted: rgba(200, 200, 200, 0.7);
     --card-bg: rgba(20, 20, 20, 0.7);
+    --navbar-height: 70px; /* Define navbar height for main content padding */
 }
 
 html {
@@ -102,6 +103,7 @@ body::before {
     left: 0;
     width: 100%;
     padding: 1.5rem 2rem;
+    height: var(--navbar-height);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -157,18 +159,25 @@ body::before {
     width: 100%;
 }
 
+main {
+    position: relative;
+    z-index: 1; 
+    padding-top: var(--navbar-height); 
+    width: 100%; 
+}
+
 .hero-section {
-    min-height: 100vh; 
+    min-height: calc(100vh - var(--navbar-height)); 
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 2rem;
     position: relative;
-    z-index: 1;
+    z-index: 1; /* z-index within main context */
 }
 
-.content { /* Used by hero */
+.content { 
     max-width: 800px;
 }
 
@@ -279,7 +288,10 @@ body::before {
     transform: translateY(40px);
     animation: sectionFadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     position: relative;
-    z-index: 1;
+    /* z-index: 1; Already part of main's stacking context, not strictly needed here */
+    max-width: 1100px; 
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .about-section { animation-delay: 0.2s; }
@@ -294,7 +306,7 @@ body::before {
     margin-bottom: 1rem;
     color: var(--secondary);
     position: relative;
-    display: inline-block;
+    display: inline-block; /* Allows text-align:center on parent to work */
     padding-bottom: 0.5rem;
 }
 
@@ -314,7 +326,7 @@ body::before {
     font-size: 1.1rem;
     color: var(--text-muted);
     line-height: 1.8;
-    max-width: 700px;
+    max-width: 700px; /* This will be centered due to its own margin auto, within centered .content-section */
     margin: 0 auto 2rem auto;
 }
 
@@ -323,9 +335,9 @@ body::before {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
+    /* max-width: 1100px;  Already on .content-section, grid can take available width or have its own constraint */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
 }
 
 .expertise-card {
@@ -333,7 +345,7 @@ body::before {
     border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 2rem 1.5rem;
     border-radius: 12px;
-    text-align: left;
+    text-align: left; /* Default text-align for content within the card */
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -349,8 +361,8 @@ body::before {
     font-size: 2.5rem;
     color: var(--accent-light);
     margin-bottom: 1rem;
-    display: block;
-    text-align: center;
+    display: block; /* Allows margin auto or text-align center on parent to work */
+    text-align: center; /* Explicitly center the icon if it's text-based */
 }
 
 .expertise-card h3 {
@@ -358,13 +370,14 @@ body::before {
     font-weight: 600;
     color: var(--secondary);
     margin-bottom: 0.75rem;
-    text-align: center;
+    text-align: center; /* Center the heading within the card */
 }
 
 .expertise-card p {
     font-size: 0.95rem;
     color: var(--text-muted);
     line-height: 1.6;
+    /* Inherits text-align: left from .expertise-card */
 }
 
 .tech-stack-section {
@@ -374,11 +387,11 @@ body::before {
 .tech-stack-items {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; /* Centers flex items */
     gap: 1rem;
     margin-top: 2.5rem;
-    max-width: 900px;
-    margin-left: auto;
+    max-width: 900px; /* Constrains the block of tech items */
+    margin-left: auto; /* Centers this block within .tech-stack-section */
     margin-right: auto;
 }
 
@@ -405,7 +418,7 @@ body::before {
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
-    z-index: 5;
+    z-index: 5; /* Ensure footer is above other page content if overlapping could occur */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     opacity: 0;
@@ -662,6 +675,12 @@ body::before {
 }
 
 @media (max-width: 768px) {
+    :root {
+        --navbar-height: 60px;
+    }
+    .hero-section {
+         min-height: calc(100vh - var(--navbar-height));
+    }
     .hero-section h1 {
         font-size: 3rem;
         letter-spacing: -2px;
@@ -674,6 +693,7 @@ body::before {
 
     .navbar {
         padding: 1rem;
+        height: var(--navbar-height);
     }
     .section-title {
         font-size: 2rem;
@@ -691,9 +711,15 @@ body::before {
      .expertise-card p {
         font-size: 0.9rem;
     }
+    .content-section {
+        padding: 3rem 1rem;
+    }
 }
 
 @media (max-width: 480px) {
+     :root {
+        --navbar-height: 55px;
+    }
     .hero-section h1 {
         font-size: 2.5rem;
     }
@@ -723,5 +749,8 @@ body::before {
     .tech-item {
         padding: 0.6rem 1.2rem;
         font-size: 0.85rem;
+    }
+    .content-section {
+        padding: 2.5rem 1rem;
     }
 }
