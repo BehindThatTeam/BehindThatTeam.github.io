@@ -7,13 +7,13 @@
 :root {
     --primary: #0a0a0a;
     --secondary: #ffffff;
-    --accent: #4B0082; 
-    --accent-light: #8A2BE2; 
-    --accent-rgb: 75, 0, 130; 
+    --accent: #4B0082;
+    --accent-light: #8A2BE2;
+    --accent-rgb: 75, 0, 130;
     --shadow: rgba(0, 0, 0, 0.3);
     --text-muted: rgba(200, 200, 200, 0.7);
     --card-bg: rgba(20, 20, 20, 0.7);
-    --navbar-height: 70px; /* Define navbar height for main content padding */
+    --navbar-height: 70px;
 }
 
 html {
@@ -34,11 +34,11 @@ body::before {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 150vw; 
-    height: 150vh; 
+    width: 150vw;
+    height: 150vh;
     transform: translate(-50%, -50%);
     background: radial-gradient(circle, rgba(var(--accent-rgb), 0.03) 0%, transparent 60%);
-    z-index: -4; 
+    z-index: -4;
     opacity: 0;
     animation: subtleBodyGlow 20s ease-in-out infinite alternate, fadeIn 3s ease forwards 2s;
 }
@@ -53,9 +53,9 @@ body::before {
             linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 30px 30px;
-    z-index: -3; 
+    z-index: -3;
     opacity: 0;
-    animation: fadeIn 1.5s ease forwards 0.5s, subtleGridMove 40s linear infinite alternate; 
+    animation: fadeIn 1.5s ease forwards 0.5s, subtleGridMove 40s linear infinite alternate;
 }
 
 .light-effect {
@@ -65,7 +65,7 @@ body::before {
     border-radius: 50%;
     background: radial-gradient(circle, rgba(var(--accent-rgb), 0.15) 0%, rgba(var(--accent-rgb), 0.05) 40%, transparent 70%);
     filter: blur(70px);
-    z-index: -2; 
+    z-index: -2;
     opacity: 0;
 }
 
@@ -74,7 +74,7 @@ body::before {
     left: -450px;
     animation: pulse 10s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate,
                fadeIn 2s ease forwards 0.8s,
-               drift1 30s linear infinite alternate; 
+               drift1 30s linear infinite alternate;
 }
 
 .light-effect-2 {
@@ -82,19 +82,19 @@ body::before {
     right: -450px;
     animation: pulse 12s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate-reverse,
                fadeIn 2s ease forwards 1s,
-               drift2 35s linear infinite alternate-reverse; 
+               drift2 35s linear infinite alternate-reverse;
 }
 
 .light-effect-3 {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
     width: 600px;
     height: 600px;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 40%, transparent 70%);
     animation: pulse 8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate,
                fadeIn 2s ease forwards 1.2s,
-               drift3 25s linear infinite alternate; 
+               drift3 25s linear infinite alternate;
 }
 
 .navbar {
@@ -109,14 +109,14 @@ body::before {
     align-items: center;
     z-index: 10;
     opacity: 0;
-    transform: translateY(-20px); 
+    transform: translateY(-20px);
     animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
-    background: rgba(10, 10, 10, 0.7); 
+    background: rgba(10, 10, 10, 0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    border-bottom: 1px solid transparent; 
-    transition: background-color 0.4s ease, border-color 0.4s ease; 
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .navbar:hover {
@@ -135,13 +135,13 @@ body::before {
     text-decoration: none;
     position: relative;
     cursor: pointer;
-    text-shadow: 0 0 8px transparent; 
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), text-shadow 0.3s ease; 
+    text-shadow: 0 0 8px transparent;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), text-shadow 0.3s ease;
 }
 
 .logo:hover {
-    transform: translateY(-3px) scale(1.08); 
-    text-shadow: 0 0 10px var(--accent-light), 0 0 18px rgba(var(--accent-rgb),0.4); 
+    transform: translateY(-3px) scale(1.08);
+    text-shadow: 0 0 10px var(--accent-light), 0 0 18px rgba(var(--accent-rgb),0.4);
 }
 
 .logo::after {
@@ -151,7 +151,7 @@ body::before {
     bottom: -5px;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--accent-light), transparent); 
+    background: linear-gradient(90deg, var(--accent-light), transparent);
     transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -161,23 +161,23 @@ body::before {
 
 main {
     position: relative;
-    z-index: 1; 
-    padding-top: var(--navbar-height); 
-    width: 100%; 
+    z-index: 1;
+    padding-top: var(--navbar-height);
+    width: 100%;
 }
 
 .hero-section {
-    min-height: calc(100vh - var(--navbar-height)); 
+    min-height: calc(100vh - var(--navbar-height));
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 2rem;
     position: relative;
-    z-index: 1; /* z-index within main context */
+    z-index: 1;
 }
 
-.content { 
+.content {
     max-width: 800px;
 }
 
@@ -192,12 +192,12 @@ main {
     color: transparent;
     position: relative;
     opacity: 0;
-    transform: translateY(50px);
-    animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s, 
-               animateGradient 6s linear infinite alternate 1.6s; 
-    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); 
-    background-size: 100% 200%; 
-    background-position: 0 0;   
+    transform: translateY(30px);
+    animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s,
+               animateGradient 6s linear infinite alternate 1.6s;
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    background-size: 100% 200%;
+    background-position: 0 0;
 }
 
 .hero-section h1::after {
@@ -208,14 +208,14 @@ main {
     transform: translateX(-50%);
     width: 40%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent); 
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
     opacity: 0;
-    animation: fadeIn 1s ease forwards 1.5s; 
+    animation: fadeIn 1s ease forwards 1.5s;
 }
 
 .hero-section p {
     font-size: 1.3rem;
-    color: var(--text-muted); 
+    color: var(--text-muted);
     margin-bottom: 3rem;
     font-weight: 300;
     line-height: 1.7;
@@ -223,15 +223,15 @@ main {
     margin-left: auto;
     margin-right: auto;
     opacity: 0;
-    transform: translateY(30px);
-    animation: slideUpP 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s; 
+    transform: translateY(40px) scale(0.98);
+    animation: slideUpP 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
 }
 
 .cta-button {
-    padding: 0.9rem 2.2rem; 
+    padding: 0.9rem 2.2rem;
     background: linear-gradient(135deg, var(--accent), var(--accent-light));
     color: var(--secondary);
-    border: 2px solid transparent; 
+    border: 2px solid transparent;
     border-radius: 30px;
     font-weight: 600;
     font-size: 1rem;
@@ -240,11 +240,11 @@ main {
     position: relative;
     overflow: hidden;
     opacity: 0;
-    transform: translateY(20px);
-    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s, 
-               ctaBreathe 3.5s ease-in-out infinite 2.5s; 
+    transform: translateY(30px);
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s,
+               ctaBreathe 3.5s ease-in-out infinite 2.5s;
     box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.3);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .cta-button::before {
@@ -254,15 +254,15 @@ main {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent); 
-    transition: left 0.8s cubic-bezier(0.23, 1, 0.32, 1); 
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: left 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .cta-button:hover {
-    transform: translateY(-6px) scale(1.08); 
-    box-shadow: 0 10px 28px rgba(var(--accent-rgb), 0.5); 
-    border-color: var(--accent-light); 
-    background: linear-gradient(135deg, var(--accent-light), var(--accent)); 
+    transform: translateY(-6px) scale(1.08);
+    box-shadow: 0 10px 28px rgba(var(--accent-rgb), 0.5);
+    border-color: var(--accent-light);
+    background: linear-gradient(135deg, var(--accent-light), var(--accent));
 }
 
 .cta-button:hover::before {
@@ -278,7 +278,7 @@ main {
     background-color: #000;
     z-index: 100;
     transform-origin: center;
-    animation: revealEffect 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards; 
+    animation: revealEffect 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
 .content-section {
@@ -288,8 +288,7 @@ main {
     transform: translateY(40px);
     animation: sectionFadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     position: relative;
-    /* z-index: 1; Already part of main's stacking context, not strictly needed here */
-    max-width: 1100px; 
+    max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -306,7 +305,7 @@ main {
     margin-bottom: 1rem;
     color: var(--secondary);
     position: relative;
-    display: inline-block; /* Allows text-align:center on parent to work */
+    display: inline-block;
     padding-bottom: 0.5rem;
 }
 
@@ -326,7 +325,7 @@ main {
     font-size: 1.1rem;
     color: var(--text-muted);
     line-height: 1.8;
-    max-width: 700px; /* This will be centered due to its own margin auto, within centered .content-section */
+    max-width: 700px;
     margin: 0 auto 2rem auto;
 }
 
@@ -335,9 +334,6 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
-    /* max-width: 1100px;  Already on .content-section, grid can take available width or have its own constraint */
-    /* margin-left: auto; */
-    /* margin-right: auto; */
 }
 
 .expertise-card {
@@ -345,7 +341,7 @@ main {
     border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 2rem 1.5rem;
     border-radius: 12px;
-    text-align: left; /* Default text-align for content within the card */
+    text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -361,8 +357,8 @@ main {
     font-size: 2.5rem;
     color: var(--accent-light);
     margin-bottom: 1rem;
-    display: block; /* Allows margin auto or text-align center on parent to work */
-    text-align: center; /* Explicitly center the icon if it's text-based */
+    display: block;
+    text-align: center;
 }
 
 .expertise-card h3 {
@@ -370,14 +366,13 @@ main {
     font-weight: 600;
     color: var(--secondary);
     margin-bottom: 0.75rem;
-    text-align: center; /* Center the heading within the card */
+    text-align: center;
 }
 
 .expertise-card p {
     font-size: 0.95rem;
     color: var(--text-muted);
     line-height: 1.6;
-    /* Inherits text-align: left from .expertise-card */
 }
 
 .tech-stack-section {
@@ -387,11 +382,11 @@ main {
 .tech-stack-items {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Centers flex items */
+    justify-content: center;
     gap: 1rem;
     margin-top: 2.5rem;
-    max-width: 900px; /* Constrains the block of tech items */
-    margin-left: auto; /* Centers this block within .tech-stack-section */
+    max-width: 900px;
+    margin-left: auto;
     margin-right: auto;
 }
 
@@ -418,7 +413,7 @@ main {
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
-    z-index: 5; /* Ensure footer is above other page content if overlapping could occur */
+    z-index: 5;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     opacity: 0;
@@ -446,8 +441,8 @@ main {
     border-radius: 50%;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.05);
-    opacity: 1; 
-    transform: none; 
+    opacity: 1;
+    transform: none;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -467,7 +462,7 @@ main {
 
 .social-link:hover {
     color: var(--secondary);
-    transform: translateY(-5px) scale(1.15); 
+    transform: translateY(-5px) scale(1.15);
 }
 
 .social-link:hover::before {
@@ -493,14 +488,14 @@ main {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    transform-origin: center bottom; 
-    animation: none; 
+    transform-origin: center bottom;
+    animation: none;
 }
 
 .ukraine-badge:hover {
-    background: rgba(var(--accent-rgb), 0.25); 
+    background: rgba(var(--accent-rgb), 0.25);
     border: 1px solid var(--accent-light);
-    transform: translateY(-4px) scale(1.05); 
+    transform: translateY(-4px) scale(1.05);
     box-shadow: 0 0 15px rgba(var(--accent-rgb),0.3);
 }
 
@@ -519,7 +514,7 @@ main {
 }
 
 
-@keyframes revealEffect { 
+@keyframes revealEffect {
     0% {
         clip-path: circle(0% at center);
     }
@@ -569,7 +564,7 @@ main {
 @keyframes slideDown {
     0% {
         opacity: 0;
-        transform: translateY(-20px); 
+        transform: translateY(-20px);
     }
     100% {
         opacity: 1;
@@ -589,7 +584,7 @@ main {
 }
 
 
-@keyframes pulse { 
+@keyframes pulse {
     0% {
         opacity: 0.3;
         transform: scale(0.9) translate(0, 0);
@@ -614,14 +609,14 @@ main {
     0% { transform: translate(0,0) scale(1); }
     100% { transform: translate(-100px, -80px) scale(0.95); }
 }
-@keyframes drift3 { 
+@keyframes drift3 {
     0% { transform: translate(-50%, -50%) scale(1); }
     100% { transform: translate(calc(-50% + 40px), calc(-50% - 40px)) scale(1.12); }
 }
 
 @keyframes subtleGridMove {
     0% { background-position: 0 0; }
-    100% { background-position: 60px 60px; } 
+    100% { background-position: 60px 60px; }
 }
 
 @keyframes animateGradient {
@@ -646,7 +641,7 @@ main {
         box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.3);
     }
     50% {
-        transform: scale(1.03); 
+        transform: scale(1.03);
         box-shadow: 0 8px 22px rgba(var(--accent-rgb), 0.45);
     }
 }
@@ -734,13 +729,13 @@ main {
     .section-paragraph {
         font-size: 0.9rem;
     }
-    
+
     .cta-button {
         padding: 0.8rem 1.8rem;
         font-size: 0.9rem;
     }
     .social-links {
-        gap: 1rem; 
+        gap: 1rem;
     }
     .ukraine-badge {
         font-size: 0.8rem;
